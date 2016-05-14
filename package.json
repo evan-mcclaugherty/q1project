@@ -2,9 +2,10 @@
   "name": "q1project",
   "version": "1.0.0",
   "description": "a webapp for brewery events",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run sass\" \"lite-server\" ",
+    "sass": "node-sass -w sass -o ./"
   },
   "repository": {
     "type": "git",
