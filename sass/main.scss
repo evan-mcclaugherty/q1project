@@ -1,2 +1,12 @@
 @import 'fonts';
 @import 'colors';
+@import 'flex';
+main {
+    height: 80vh;
+    .circle {
+        width: 100%;
+        height: width;
+        border: 1px solid black;
+        border-radius: 50%;
+    }
+}
