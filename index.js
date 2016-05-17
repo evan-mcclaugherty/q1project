@@ -1,4 +1,16 @@
+let breweries = []
 $(document).ready(function() {
+    $.get("http://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8", function(obj) {
+        obj.data.forEach(el => {
+            breweries.push(el);
+        })
+        for (let stuff of breweries) {
+            console.log(stuff);
+        }
+    })
+
+
+
     let quoteInfo = $('#quote-template').html();
     let template = Handlebars.compile(quoteInfo);
     let quoteData = template({

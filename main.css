@@ -156,11 +156,3 @@ h4 {
     margin: -2em 0 2em -2em; }
   .large-Grid--guttersXl > .Grid-cell {
     padding: 2em 0 0 2em; } }
-
-main {
-  height: 80vh; }
-  main .circle {
-    width: 100%;
-    height: width;
-    border: 1px solid black;
-    border-radius: 50%; }
