@@ -1,35 +1,60 @@
-let breweries = []
-$(document).ready(function() {
-    $.get("http://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8", function(obj) {
-        obj.data.forEach(el => {
-            breweries.push(el);
+let breweryList = [];
+
+class Brewery {
+    constructor(obj) {
+        this.id = obj.id || '';
+        this.name = obj.name || '';
+        this.website = obj.website || '';
+        this.type = obj.locationTypeDisplay || '';
+        this.street = obj.streetAddress || '';
+        this.city = obj.locality || '';
+        this.zip = obj.postalCode || '';
+        this.phone = obj.phone || '';
+        this.latitude = obj.latitude || '';
+        this.longitude = obj.longitude || '';
+        this.description = obj.brewery.description || '';
+        this.established = obj.brewery.established || '';
+        if (obj.brewery.images) {
+            this.icon = obj.brewery.images.icon || '';
+            this.large = obj.brewery.images.large || '';
+            this.medium = obj.brewery.images.medium || '';
+            this.squareLarge = obj.brewery.images.squareLarge || '';
+            this.squareMedium = obj.brewery.images.squareLarge || '';
+        }
+    }
+}
+
+$(document).ready(
+        function() {
+            $.get("http://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8").done(function(obj) {
+                obj.data.forEach(el => {
+                    if (el.website !== '') {
+                        breweryList.push(new Brewery(el));
+                    }
+                });
+            }).done(
+                function() {
+                    let carousel = $('#ca-item').html();
+                    let template = Handlebars.compile(carousel);
+                    let counter = 1;
+                    for (let brew of breweryList) {
+                        let carouselData = template({
+                            title: brew.name,
+                            details: brew.description,
+                            description: brew.description
+                        });
+                        $('.ca-wrapper').append(`<div id="no${counter}" class="ca-item ca-item-${counter}"></div>`);
+                        $(`#no${counter}`).html(carouselData);
+                        let imageUrl = brew.medium;
+                        $(`#no${counter} .ca-icon`).css('background-image', 'url(' + imageUrl + ')');
+                        counter++;
+                    }
+                    $('#ca-container').contentcarousel();
+                }
+            )
         })
-        for (let stuff of breweries) {
-            console.log(stuff);
-        }
-    })
-
-
-
-    let quoteInfo = $('#quote-template').html();
-    let template = Handlebars.compile(quoteInfo);
-    let quoteData = template({
-        name: "Yogi Berra",
-        quotes: [{
-            quote: "Sometimes you win"
-        }, {
-            quote: "Sometimes you don't"
-        }, {
-            quote: "Sometimes you do real well"
-        }, {
-            quote: "Sometimes you have a thing on your mind...."
-        }],
-        yogiBio: '<i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</i>'
-    }, {
-        data: { //data available to any of the helpers
-            lang: "spanish"
-        }
-    });
-
-    $('.quoteData').html(quoteData);
-});
+    // let quoteInfo = $('#quote-template').html();
+    // let template = Handlebars.compile(quoteInfo);
+    // let quoteData = template({});
+    //
+    // $('.quoteData').html(quoteData);
