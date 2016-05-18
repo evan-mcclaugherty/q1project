@@ -1,4 +1,19 @@
 @import 'fonts';
 @import 'colors';
 @import 'flex';
-main {}
+.outer {
+    margin: 20px;
+    padding: 0;
+}
+.inner {
+    height: 400px;
+    border: 1px solid black;
+    padding: 10px;
+}
+.ca-icon {
+    height: 100px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

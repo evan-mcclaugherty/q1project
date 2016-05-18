@@ -4,20 +4,20 @@ class Brewery {
     constructor(obj) {
         this.id = obj.id || '';
         if (obj.name == "Main Brewery") {
-            this.name = '';
+            this.name = 'No Name';
         } else {
-            this.name = obj.name || '';
+            this.name = obj.name;
         }
         this.website = obj.website || '';
-        this.type = obj.locationTypeDisplay || '';
-        this.street = obj.streetAddress || '';
-        this.city = obj.locality || '';
-        this.zip = obj.postalCode || '';
-        this.phone = obj.phone || '';
-        this.latitude = obj.latitude || '';
-        this.longitude = obj.longitude || '';
-        this.description = obj.brewery.description || '';
-        this.established = obj.brewery.established || '';
+        this.type = obj.locationTypeDisplay || 'No Type';
+        this.street = obj.streetAddress || 'No Stree';
+        this.city = obj.locality || 'No City';
+        this.zip = obj.postalCode || 'No Zip';
+        this.phone = obj.phone || 'No Phone';
+        this.latitude = obj.latitude || 'No Latitude';
+        this.longitude = obj.longitude || 'No Longitude';
+        this.description = obj.brewery.description || 'No Description';
+        this.established = obj.brewery.established || 'No Established Date';
         if (obj.brewery.images) {
             this.icon = obj.brewery.images.icon || '';
             this.large = obj.brewery.images.large || '';
@@ -39,6 +39,7 @@ $(document).ready(
                 });
             }).done(
             function() {
+
                 let carousel = $('#ca-item').html();
                 let template = Handlebars.compile(carousel);
                 let counter = 1;
@@ -48,18 +49,56 @@ $(document).ready(
                         established: brew.established,
                         link: `${brew.website}`,
                         description: brew.description,
-                        type: brew.type
+                        type: brew.type,
+                        brewId: brew.id
                     });
-                    $('.ca-wrapper').append(`<div id="no${counter}" class="ca-item ca-item-${counter}"></div>`);
+                    $('.ca-wrapper').append(`<div id="no${counter}" class="container outer"></div>`);
                     $(`#no${counter}`).html(carouselData);
-                    $(`#no${counter} .ca-icon`).css('background-image', `url('${brew.medium}')`);
+                    if (brew.medium) {
+                        $(`#no${counter} .ca-icon`).css('background-image', `url('${brew.medium}')`);
+                    }
                     counter++;
                 }
-                $('#ca-container').contentcarousel();
+
+                $('.ca-wrapper').slick({
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                });
+
+                let brewModal = $('#brewModal').html();
+                let brewTemplate = Handlebars.compile(brewModal);
+
+                $('.outer').on('click', function() {
+                    let id = $(this).find('#brewId').text();
+                    let obj = breweryList.find(el => {
+                        if (el.id === id) return el
+                    });
+                    console.log(obj);
+                    let brewData = brewTemplate({
+                        title: obj.name,
+                        street: obj.street,
+                        city: obj.city,
+                        zip: obj.zip,
+                        phone: obj.phone,
+                        description: obj.description
+                    });
+                    let pic = obj.large || obj.squareLarge;
+                    $('#brewery').attr('src', `url('${pic}')`);
+                    $('#brewery').html(brewData);
+                    $('#brewery').modal('show')
+                });
 
                 $('#addEvent').on('click', function() {
                     $('#myModal').modal('show')
-                })
+                });
+                // $('.js-add-slide').on('click', function() {   // add slide
+                //     slideIndex++;
+                //     $('.add-remove').slick('slickAdd', '<div><h3>' + slideIndex + '</h3></div>');
+                // });
+
+
+
             }
         );
     });
