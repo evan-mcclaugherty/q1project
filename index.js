@@ -30,7 +30,7 @@ class Brewery {
 
 $(document).ready(
     function() {
-        $.get("http://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8").done(
+        $.get("https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8").done(
             function(obj) {
                 obj.data.forEach(el => {
                     if (el.website !== '') {
@@ -43,11 +43,12 @@ $(document).ready(
                 let template = Handlebars.compile(carousel);
                 let counter = 1;
                 for (let brew of breweryList) {
-                    console.log(brew.name)
                     let carouselData = template({
                         title: brew.name,
-                        details: brew.description,
-                        description: brew.description
+                        established: brew.established,
+                        link: `${brew.website}`,
+                        description: brew.description,
+                        type: brew.type
                     });
                     $('.ca-wrapper').append(`<div id="no${counter}" class="ca-item ca-item-${counter}"></div>`);
                     $(`#no${counter}`).html(carouselData);
@@ -55,6 +56,10 @@ $(document).ready(
                     counter++;
                 }
                 $('#ca-container').contentcarousel();
+
+                $('#addEvent').on('click', function() {
+                    $('#myModal').modal('show')
+                })
             }
         );
     });
