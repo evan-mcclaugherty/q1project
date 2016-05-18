@@ -74,7 +74,6 @@ $(document).ready(
                     let obj = breweryList.find(el => {
                         if (el.id === id) return el
                     });
-                    console.log(obj);
                     let brewData = brewTemplate({
                         title: obj.name,
                         street: obj.street,
@@ -83,8 +82,6 @@ $(document).ready(
                         phone: obj.phone,
                         description: obj.description
                     });
-                    let pic = obj.large || obj.squareLarge;
-                    $('#brewery').attr('src', `url('${pic}')`);
                     $('#brewery').html(brewData);
                     $('#brewery').modal('show')
                 });
@@ -92,6 +89,14 @@ $(document).ready(
                 $('#addEvent').on('click', function() {
                     $('#myModal').modal('show')
                 });
+
+                let form = $('form');
+                form.on('submit', function(event) {
+                    event.preventDefault();
+                    $('#myModal').modal('hide')
+                });
+
+
                 // $('.js-add-slide').on('click', function() {   // add slide
                 //     slideIndex++;
                 //     $('.add-remove').slick('slickAdd', '<div><h3>' + slideIndex + '</h3></div>');

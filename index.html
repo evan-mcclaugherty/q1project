@@ -8,8 +8,9 @@
     <title>Denver Breweries</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css" />
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body class="container">
@@ -97,7 +98,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">Brewery Name</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" id="name" placeholder="Brewery Name">
+                                <input type="text" class="form-control" id="name" placeholder="Brewery Name">
                             </div>
                         </div>
 
@@ -121,11 +122,11 @@
                                 <input type='url' class="form-control" id="photo" placeholder="http://">
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
             <!-- /.modal-content -->

@@ -17,3 +17,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.slick-next:before,
+.slick-prev:before {
+    color: black;
+}
