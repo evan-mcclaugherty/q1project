@@ -38,10 +38,10 @@
             <h5 class="Grid-cell">{{title}}</h5>
             <div class="ca-icon Grid-cel"></div>
             <h6 class="Grid-cell">
-                <a href={{link}}>Website</a>
+                <a href="{{link}}">{{website}}</a>
             </h6>
             <h6 class="Grid-cell">
-                Established in {{established}} <br>
+                {{established}} <br>
                 {{type}}
             </h6>
             <button type="button" id="button" class="btn btn-primary btn-xs">More Info
@@ -56,25 +56,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{title}}</h4>
+                    <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title brewTitle container col-sm-9">
+                        {{title}}
+                    </h4>
                 </div>
                 <div class="modal-body">
-                    <div class="Grid container-fluid">
-                        <h6 class="Grid-cell container">
+                    <div class="Grid container-fluid brewGrid">
+                        <h6 class="Grid-cell container brewCell">
                                 <p>{{street}}</p>
                                 <p>{{city}} </p>
                                 <p>{{zip}}</p>
                             </h6>
-                        <h6 class="Grid-cell">
+                        <h6 class="Grid-cell container brewCell">
                                 {{phone}}
                             </h6>
-                        <h6 class="Grid-cell">
+                        <h6 class="Grid-cell container brewCell">
                                 See on map
                             </h6>
                     </div>
-                    <div class="container-fluid">
-                        <p>
+                    <div class="container-fluid Grid brewGrid">
+                        <p class="Grid-cell container brewCell">
                             {{description}}
                         </p>
                     </div>
@@ -92,7 +94,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add your brewery</h4>
+                    <h4 class="modal-title brewTitle col-sm-8">Add your brewery</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
