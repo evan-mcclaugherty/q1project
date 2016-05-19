@@ -62,6 +62,7 @@ $(document).ready(
                     $(`#no${counter} .ca-icon`).css('background-image', `url('${picture}')`);
                     counter++;
                 }
+
                 //update slick carousel
                 $('.ca-wrapper').slick({
                     infinite: true,
@@ -76,6 +77,7 @@ $(document).ready(
                     breweryList.push(persist.obj)
                     counter++;
                 }
+
                 // Modal for each brewery when clicked
                 let brewModal = $('#brewModal').html();
                 let brewTemplate = Handlebars.compile(brewModal);
@@ -102,6 +104,7 @@ $(document).ready(
                 $('#addEvent').on('click', function() {
                     $('#myModal').modal('show')
                 });
+
                 // Put the brewery in the same format as API
                 $('form').on('submit', function(event) {
                     event.preventDefault();
@@ -148,6 +151,23 @@ $(document).ready(
                     localStorage.setItem(userID, JSON.stringify(userData))
                         //add user generated Brewery
                     $('.ca-wrapper').slick('slickAdd', div.html());
+                    $('button#button').on('click', function() {
+                        let id = $(this).find('#brewId').text();
+                        let obj = breweryList.find(el => {
+                            if (el.id == id) return el
+                        });
+                        //build a template for each modal
+                        let brewData = brewTemplate({
+                            title: obj.name,
+                            street: obj.street,
+                            city: obj.city,
+                            zip: obj.zip,
+                            phone: obj.phone,
+                            description: obj.description
+                        });
+                        $('#brewery').html(brewData);
+                        $('#brewery').modal('show')
+                    }); 
                 });
             }
         );
