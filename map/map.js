@@ -29,7 +29,7 @@ function initMap() {
         let get = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAHZi4zP3zyhCUMgU81JvNlaQKBRWNMgPg";
         $.get(get).done(
             function(data) {
-                $(".currentLocation").append($("<option></option>").val(data).html("Current Location"));
+                $(".currentLocation").append($("<option></option>").val(data.results[0].formatted_address).html("Current Location"));
             }
         )
     });
@@ -70,8 +70,7 @@ function initMap() {
             let get = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + brewery.latitude + "," + brewery.longitude + "&key=AIzaSyAHZi4zP3zyhCUMgU81JvNlaQKBRWNMgPg";
             $.get(get).done(
                 function(data) {
-                    $(".addLocations").append($(`<option>${marker.title}</option>`).val(data));
-                    console.log(data);
+                    $(".addLocations").append($(`<option>${marker.title}</option>`).val(data.results[0].formatted_address));
                 }
             )
 
