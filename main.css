@@ -169,6 +169,10 @@ h6 {
   height: 100px;
   width: auto; }
 
+.selectOptions {
+  justify-content: space-around;
+  align-content: space-around; }
+
 .outer {
   margin: 10px;
   padding: 0; }
