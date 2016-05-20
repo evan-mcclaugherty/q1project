@@ -1,4 +1,4 @@
-let breweryList = [];
+let breweryList = []; // wanted to create a method to actually store this in the class :(
 class Brewery {
     constructor(obj) {
         this.id = obj.id || '';
@@ -37,6 +37,8 @@ $(document).ready(
                 obj.data.forEach(el => {
                     if (el.website !== '') {
                         breweryList.push(new Brewery(el));
+                        localStorage.setItem('data', JSON.stringify(breweryList));
+
                     }
                 });
             }).done(

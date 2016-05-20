@@ -18,8 +18,8 @@
         <h1 class="brewTitle text-center">Denver Breweries</h1>
         <nav class="container">
             <ul class="nav nav-tabs nav-justified container">
-                <li role="presentation" class="active"><a href="#">Breweries</a></li>
-                <li role="presentation"><a href="#">Map</a></li>
+                <li role="presentation" class="active"><a href="./index.html">Breweries</a></li>
+                <li role="presentation"><a href="./map/map.html">Map</a></li>
                 <li role="presentation"><a href="#">List</a></li>
                 <li role="presentation">
                     <a href="#" id="addEvent" data-target="#myModal">
@@ -41,8 +41,9 @@
                 <a href="{{link}}">{{website}}</a>
             </h6>
             <p class="Grid-cell">
-                {{established}} <br>
-                {{type}} <br>
+                {{established}}
+                <br> {{type}}
+                <br>
                 <button type="button" id="button" class="btn btn-primary btn-xs">More Info
                     <div id="brewId" hidden>{{brewId}}</div>
                 </button>

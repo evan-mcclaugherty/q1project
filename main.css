@@ -159,6 +159,16 @@ h6 {
   .large-Grid--guttersXl > .Grid-cell {
     padding: 2em 0 0 2em; } }
 
+#map {
+  height: 70vh;
+  width: 100%;
+  margin-top: 4vh;
+  border-radius: 2rem; }
+
+.mapImage {
+  height: 100px;
+  width: auto; }
+
 .outer {
   margin: 10px;
   padding: 0; }
