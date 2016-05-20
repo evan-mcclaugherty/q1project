@@ -18,11 +18,11 @@ class Brewery {
         this.description = obj.brewery.description || '';
         this.established = obj.brewery.established || '';
         if (obj.brewery.images) {
-            this.icon = obj.brewery.images.icon || '';
-            this.large = obj.brewery.images.large || '';
-            this.medium = obj.brewery.images.medium || '';
-            this.squareLarge = obj.brewery.images.squareLarge || '';
-            this.squareMedium = obj.brewery.images.squareLarge || '';
+            this.icon = obj.brewery.images.icon;
+            this.large = obj.brewery.images.large;
+            this.medium = obj.brewery.images.medium;
+            this.squareLarge = obj.brewery.images.squareLarge;
+            this.squareMedium = obj.brewery.images.squareMedium;
         }
     }
 
@@ -30,7 +30,7 @@ class Brewery {
 
 $(document).ready(
     function() {
-        localStorage.clear()
+        //localStorage.clear()
 
         $.get("https://galvanize-cors-proxy.herokuapp.com/http://api.brewerydb.com/v2/locations?locality=Denver&key=fbb4282721faf956ef728ec873e1cdc8").done(
             function(obj) {
@@ -46,9 +46,12 @@ $(document).ready(
                 let template = Handlebars.compile(carousel);
                 // add all the api data to the carousel
                 for (let brew of breweryList) {
+                    let picture = brew.medium || brew.squareMedium || brew.large || brew.squareLarge || brew.icon;
+                    if (picture === undefined) continue;
                     let carouselData = template({
                         title: brew.name,
-                        established: brew.established,
+                        established: brew.established === '' ? '' : "Established in : " + brew.established,
+                        website: brew.website === '' ? '' : brew.name === '' ? "Website" : brew.name,
                         link: `${brew.website}`,
                         description: brew.description,
                         type: brew.type,
@@ -56,11 +59,10 @@ $(document).ready(
                     });
                     $('.ca-wrapper').append(`<div id="no${counter}" class="container outer"></div>`);
                     $(`#no${counter}`).html(carouselData);
-                    if (brew.medium) {
-                        $(`#no${counter} .ca-icon`).css('background-image', `url('${brew.medium}')`);
-                    }
+                    $(`#no${counter} .ca-icon`).css('background-image', `url('${picture}')`);
                     counter++;
                 }
+
                 //update slick carousel
                 $('.ca-wrapper').slick({
                     infinite: true,
@@ -75,6 +77,7 @@ $(document).ready(
                     breweryList.push(persist.obj)
                     counter++;
                 }
+
                 // Modal for each brewery when clicked
                 let brewModal = $('#brewModal').html();
                 let brewTemplate = Handlebars.compile(brewModal);
@@ -101,6 +104,7 @@ $(document).ready(
                 $('#addEvent').on('click', function() {
                     $('#myModal').modal('show')
                 });
+
                 // Put the brewery in the same format as API
                 $('form').on('submit', function(event) {
                     event.preventDefault();
@@ -147,6 +151,23 @@ $(document).ready(
                     localStorage.setItem(userID, JSON.stringify(userData))
                         //add user generated Brewery
                     $('.ca-wrapper').slick('slickAdd', div.html());
+                    $('button#button').on('click', function() {
+                        let id = $(this).find('#brewId').text();
+                        let obj = breweryList.find(el => {
+                            if (el.id == id) return el
+                        });
+                        //build a template for each modal
+                        let brewData = brewTemplate({
+                            title: obj.name,
+                            street: obj.street,
+                            city: obj.city,
+                            zip: obj.zip,
+                            phone: obj.phone,
+                            description: obj.description
+                        });
+                        $('#brewery').html(brewData);
+                        $('#brewery').modal('show')
+                    });
                 });
             }
         );
