@@ -21,9 +21,18 @@
             </ul>
         </nav>
     </header>
-    <main class="Grid Grid--justifyCenter">
-        <div class="Grid-cell" id="map"></div>
+    <main class="Grid Grid--justifyCenter Grid--1of2">
+        <div class="Grid-cell row">
+            <div class="container col-sm-11">
+                <br><br><br>
+                <select class="form-control currentLocation start" id="start">
+                </select>
+                <br><br><br>
+                <select class="form-control addLocations container col-sm-11 end" id="end">
+                </select>
+            </div>
         </div>
+        <div class="Grid-cell" id="map"></div>
     </main>
 
     <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
