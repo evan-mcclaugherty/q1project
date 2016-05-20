@@ -181,7 +181,8 @@ h6 {
 
 .slick-next,
 .slick-prev {
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+  transform: scale(1.5); }
   .slick-next:before,
   .slick-prev:before {
     color: #104BA9; }
@@ -199,8 +200,11 @@ h6 {
 
 .brewTitle {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  background-color: #cc9900;
-  border-radius: 10px; }
+  background-image: url("http://img1.123freevectors.com/wp-content/uploads/great/seamless-beer-background-free-vector-156.jpg");
+  color: white; }
+
+.miniTitle {
+  color: #D65D0F; }
 
 .brewGrid {
   border-radius: 5px;

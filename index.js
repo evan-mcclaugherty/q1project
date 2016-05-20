@@ -167,7 +167,7 @@ $(document).ready(
                         });
                         $('#brewery').html(brewData);
                         $('#brewery').modal('show')
-                    }); 
+                    });
                 });
             }
         );
