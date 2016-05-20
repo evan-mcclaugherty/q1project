@@ -54,7 +54,6 @@ function initMap() {
                 position: myLatLng,
                 icon: "http://icons.iconarchive.com/icons/flat-icons.com/flat/24/Beer-icon.png"
             });
-            console.log(marker)
             marker.setMap(map);
 
             marker.addListener('click', toggleBounce);

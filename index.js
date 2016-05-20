@@ -153,6 +153,9 @@ $(document).ready(
                     localStorage.setItem(userID, JSON.stringify(userData))
                         //add user generated Brewery
                     $('.ca-wrapper').slick('slickAdd', div.html());
+
+                    //tried to solve the problem here where when i added a user breweryList
+                    //you couldn't click the more info button until it refreshed. didn't work.
                     $('button#button').on('click', function() {
                         let id = $(this).find('#brewId').text();
                         let obj = breweryList.find(el => {
